@@ -52,9 +52,9 @@ module.exports = {
             // { from: "./src/css/Hedra-logo*", to: "css" },
             {from: "./src/img/favicon-16x16.png"},
             {from: "./src/img/favicon-32x32.png"},
-            {from: "./src/img/favicon-96x96.png"},
-            {from: "./src/img/Hedra-editor-v15.jpg", to: "img"},
-            {from: "./src/img/Hedra-editor-v15.png", to: "img"}
+            {from: "./src/img/favicon-96x96.png"}
+            // {from: "./src/img/Hedra-editor-v15.jpg", to: "img"},
+            // {from: "./src/img/Hedra-editor-v15.png", to: "img"}
         ]}),
         new HtmlWebpackPlugin({
             chunks: ["app_bundle"],

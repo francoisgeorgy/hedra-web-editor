@@ -30,37 +30,37 @@ function toggleBypass() {
 }
 
 function selectSquarewave() {
-    const c = MODEL.control[MODEL.control_id.synth_waveshape];
+    const c = MODEL.control[MODEL.control_id.pitch_smoothing];
     updateDevice(c.cc_type, c.cc_number, WAVESHAPES.square);
     updateControl(c.cc_type, c.cc_number, WAVESHAPES.square);
 }
 
 function selectSawtooth() {
-    const c = MODEL.control[MODEL.control_id.synth_waveshape];
+    const c = MODEL.control[MODEL.control_id.pitch_smoothing];
     updateDevice(c.cc_type, c.cc_number, WAVESHAPES.sawtooth);
     updateControl(c.cc_type, c.cc_number, WAVESHAPES.sawtooth);
 }
 
 function selectDry() {
-    const c = MODEL.control[MODEL.control_id.synth_mode];
+    const c = MODEL.control[MODEL.control_id.delay_mode];
     updateDevice(c.cc_type, c.cc_number, SYNTH_MODES.dry);
     updateControl(c.cc_type, c.cc_number, SYNTH_MODES.dry);
 }
 
 function selectMono() {
-    const c = MODEL.control[MODEL.control_id.synth_mode];
+    const c = MODEL.control[MODEL.control_id.delay_mode];
     updateDevice(c.cc_type, c.cc_number, SYNTH_MODES.mono);
     updateControl(c.cc_type, c.cc_number, SYNTH_MODES.mono);
 }
 
 function selectPoly() {
-    const c = MODEL.control[MODEL.control_id.synth_mode];
+    const c = MODEL.control[MODEL.control_id.delay_mode];
     updateDevice(c.cc_type, c.cc_number, SYNTH_MODES.poly);
     updateControl(c.cc_type, c.cc_number, SYNTH_MODES.poly);
 }
 
 function selectArp() {
-    const c = MODEL.control[MODEL.control_id.synth_mode];
+    const c = MODEL.control[MODEL.control_id.delay_mode];
     updateDevice(c.cc_type, c.cc_number, SYNTH_MODES.arp);
     updateControl(c.cc_type, c.cc_number, SYNTH_MODES.arp);
 }
@@ -182,7 +182,7 @@ function keyDown(code, alt, shift, meta, ctrl) {
 
     //FIXME: map to key's position, not key's value (in order to be isolated from the keyboard layout)
 
-    const portamento = MODEL.getControlValue(MODEL.getControl(MODEL.control_id.portamento));
+    const portamento = MODEL.getControlValue(MODEL.getControl(MODEL.control_id.scale_type));
 
     if (!alt && !shift && !meta) {
         switch (code) {
@@ -234,11 +234,11 @@ function keyDown(code, alt, shift, meta, ctrl) {
             case 32:                // SPACE
                 toggleBypass();
                 break;
-            case 83:                // S    toggle sustain
-                // animateTo(MODEL.control_id.sustain, ctrl ? 0 : 127);
-                let v = MODEL.getControlValue(MODEL.getControl(MODEL.control_id.sustain)) ? 0 : 127;
-                updateModelAndUI("cc", MODEL.control_id.sustain, v);
-                updateDevice("cc", MODEL.control_id.sustain, v);
+            case 83:                // S    toggle pitch_1
+                // animateTo(MODEL.control_id.pitch_1, ctrl ? 0 : 127);
+                let v = MODEL.getControlValue(MODEL.getControl(MODEL.control_id.pitch_1)) ? 0 : 127;
+                updateModelAndUI("cc", MODEL.control_id.pitch_1, v);
+                updateDevice("cc", MODEL.control_id.pitch_1, v);
                 break;
             case 75:                // K
                 toggleScroll();
@@ -249,30 +249,30 @@ function keyDown(code, alt, shift, meta, ctrl) {
 
 /*
             case 67:                // C
-                animateTo(MODEL.control_id.pitch, ctrl ? 63 : 0);
-                // animateCC(MODEL.control_id.pitch, MODEL.getControlValue(MODEL.getControl(MODEL.control_id.pitch)), ctrl ? 63 : 0, animate_callback);
+                animateTo(MODEL.control_id.key, ctrl ? 63 : 0);
+                // animateCC(MODEL.control_id.key, MODEL.getControlValue(MODEL.getControl(MODEL.control_id.key)), ctrl ? 63 : 0, animate_callback);
                 break;
             case 86:                // V
-                animateTo(MODEL.control_id.pitch, ctrl ? 63 : 127);
-                // animateCC(MODEL.control_id.pitch, MODEL.getControlValue(MODEL.getControl(MODEL.control_id.pitch)), ctrl ? 63 : 127);
+                animateTo(MODEL.control_id.key, ctrl ? 63 : 127);
+                // animateCC(MODEL.control_id.key, MODEL.getControlValue(MODEL.getControl(MODEL.control_id.key)), ctrl ? 63 : 127);
                 break;
             case 70:                // F
-                animateTo(MODEL.control_id.filter, ctrl ? 63 : 0);
+                animateTo(MODEL.control_id.micro_tune, ctrl ? 63 : 0);
                 break;
             case 71:                // G
-                animateTo(MODEL.control_id.filter, ctrl ? 63 : 127);
+                animateTo(MODEL.control_id.micro_tune, ctrl ? 63 : 127);
                 break;
             case 72:                // H
-                animateTo(MODEL.control_id.filter_bandwidth, ctrl ? 63 : 0);
+                animateTo(MODEL.control_id.time_division_2, ctrl ? 63 : 0);
                 break;
             case 74:                // J
-                animateTo(MODEL.control_id.filter_bandwidth, ctrl ? 63 : 127);
+                animateTo(MODEL.control_id.time_division_2, ctrl ? 63 : 127);
                 break;
             case 75:                // K    delay level
-                animateTo(MODEL.control_id.delay_level, ctrl ? 63 : 0);
+                animateTo(MODEL.control_id.feedback, ctrl ? 63 : 0);
                 break;
             case 76:                // L    delay level
-                animateTo(MODEL.control_id.delay_level, ctrl ? 63 : 127);
+                animateTo(MODEL.control_id.feedback, ctrl ? 63 : 127);
                 break;
             case 89:                // Y    min mix
                 animateTo(MODEL.control_id.mix, ctrl ? 63 : 0);
@@ -280,29 +280,29 @@ function keyDown(code, alt, shift, meta, ctrl) {
             case 88:                // X    max mix
                 animateTo(MODEL.control_id.mix, ctrl ? 63 : 127);
                 break;
-            case 8:                 // DEL  min sustain
-                animateTo(MODEL.control_id.sustain, 0);
+            case 8:                 // DEL  min pitch_1
+                animateTo(MODEL.control_id.pitch_1, 0);
                 break;
-            case 66:                // B    min sustain
-                animateTo(MODEL.control_id.sustain, ctrl ? 63 : 0);
+            case 66:                // B    min pitch_1
+                animateTo(MODEL.control_id.pitch_1, ctrl ? 63 : 0);
                 break;
-            case 78:                // N    max sustain
-                animateTo(MODEL.control_id.sustain, ctrl ? 63 : 127);
+            case 78:                // N    max pitch_1
+                animateTo(MODEL.control_id.pitch_1, ctrl ? 63 : 127);
                 break;
             case 90:                // Z
-                animateTo(MODEL.control_id.ring_modulation, ctrl ? 63 : 0);
+                animateTo(MODEL.control_id.time_division_1, ctrl ? 63 : 0);
                 break;
             case 85:                // U
-                animateTo(MODEL.control_id.ring_modulation, ctrl ? 63 : 127);
+                animateTo(MODEL.control_id.time_division_1, ctrl ? 63 : 127);
                 break;
             case 109:               // num keypad "-"
-                animateTo(MODEL.control_id.modulation, ctrl ? 63 : 0);
+                animateTo(MODEL.control_id.pitch_3, ctrl ? 63 : 0);
                 break;
             case 107:               // num keypad "+"
-                animateTo(MODEL.control_id.modulation, ctrl ? 63 : 127);
+                animateTo(MODEL.control_id.pitch_3, ctrl ? 63 : 127);
                 break;
             case 79:                // O
-                animateFromTo(MODEL.control_id.portamento, portamento, ctrl ? 63 : (portamento < 63 ? 127 : 0));
+                animateFromTo(MODEL.control_id.scale_type, scale_type, ctrl ? 63 : (scale_type < 63 ? 127 : 0));
                 break;
 */
         }

@@ -255,37 +255,37 @@ export function getPreset(complete = true) {
 
     data[i++] = meta.preset_id.value;                               // 8
 
-    data[i++] = control[control_id.pitch].raw_value;                // 9
-    data[i++] = control[control_id.filter].raw_value;
+    data[i++] = control[control_id.key].raw_value;                // 9
+    data[i++] = control[control_id.micro_tune].raw_value;
     data[i++] = control[control_id.mix].raw_value;
-    data[i++] = control[control_id.sustain].raw_value;
-    data[i++] = control[control_id.filter_envelope].raw_value;
-    data[i++] = control[control_id.modulation].raw_value;
-    data[i++] = control[control_id.portamento].raw_value;
-    data[i++] = control[control_id.filter_type].raw_value;
-    data[i++] = control[control_id.delay_level].raw_value;
-    data[i++] = control[control_id.ring_modulation].raw_value;
-    data[i++] = control[control_id.filter_bandwidth].raw_value;
-    data[i++] = control[control_id.delay_feedback].raw_value;
+    data[i++] = control[control_id.pitch_1].raw_value;
+    data[i++] = control[control_id.pitch_2].raw_value;
+    data[i++] = control[control_id.pitch_3].raw_value;
+    data[i++] = control[control_id.scale_type].raw_value;
+    data[i++] = control[control_id.pitch_correction].raw_value;
+    data[i++] = control[control_id.feedback].raw_value;
+    data[i++] = control[control_id.time_division_1].raw_value;
+    data[i++] = control[control_id.time_division_2].raw_value;
+    data[i++] = control[control_id.time_division_3].raw_value;
     data[i++] = control[control_id.bypass].raw_value;
-    data[i++] = control[control_id.envelope_type].raw_value;
-    data[i++] = control[control_id.synth_mode].raw_value;
-    data[i++] = control[control_id.synth_waveshape].raw_value;
+    data[i++] = control[control_id.half_speed_enable].raw_value;
+    data[i++] = control[control_id.delay_mode].raw_value;
+    data[i++] = control[control_id.pitch_smoothing].raw_value;
     data[i++] = control[control_id.tempo].raw_value;
 
     // values 2 (EXP)
-    data[i++] = control[control_id.pitch].raw_value2;               // 26
-    data[i++] = control[control_id.filter].raw_value2;
+    data[i++] = control[control_id.key].raw_value2;               // 26
+    data[i++] = control[control_id.micro_tune].raw_value2;
     data[i++] = control[control_id.mix].raw_value2;
-    data[i++] = control[control_id.sustain].raw_value2;
-    data[i++] = control[control_id.filter_envelope].raw_value2;
-    data[i++] = control[control_id.modulation].raw_value2;
-    data[i++] = control[control_id.portamento].raw_value2;
-    data[i++] = control[control_id.filter_type].raw_value2;
-    data[i++] = control[control_id.delay_level].raw_value2;
-    data[i++] = control[control_id.ring_modulation].raw_value2;
-    data[i++] = control[control_id.filter_bandwidth].raw_value2;
-    data[i++] = control[control_id.delay_feedback].raw_value2;      // 37
+    data[i++] = control[control_id.pitch_1].raw_value2;
+    data[i++] = control[control_id.pitch_2].raw_value2;
+    data[i++] = control[control_id.pitch_3].raw_value2;
+    data[i++] = control[control_id.scale_type].raw_value2;
+    data[i++] = control[control_id.pitch_correction].raw_value2;
+    data[i++] = control[control_id.feedback].raw_value2;
+    data[i++] = control[control_id.time_division_1].raw_value2;
+    data[i++] = control[control_id.time_division_2].raw_value2;
+    data[i++] = control[control_id.time_division_3].raw_value2;      // 37
 
     if (complete) data[i] = SYSEX_END_BYTE;                         // 38
 

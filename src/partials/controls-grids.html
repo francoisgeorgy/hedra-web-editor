@@ -7,11 +7,13 @@
             <div class="header-shortcut hidden">[C,V]</div>
             <div>Key</div>
         </div>
-        <div class="value-human">
-            C#
-        </div>
-        <div class="controls">
-            <svg class="knob" id="cc-16"></svg>
+        <div id="cc-23-options" class="grid-3x2 controls-options-grid">
+            <div id="cc-23-0" class="bt">LP</div>
+            <div id="cc-23-87" class="bt">v. LP</div>
+            <div id="cc-23-32" class="bt">BP</div>
+            <div id="cc-23-115" class="bt">v. BP</div>
+            <div id="cc-23-59" class="bt">HP</div>
+            <div id="cc-23-127" class="bt">v. HP</div>
         </div>
     </div>
     <!--
@@ -20,13 +22,15 @@
     <div id="portamento" class="grid-default mg-row-border-top controls-row">
         <div class="header exp infos" data-infos="22">
             <div class="header-shortcut hidden">[O]</div>
-            <div>mode</div>
+            <div>portamento</div>
         </div>
-        <div class="value-human">
-            major
-        </div>
-        <div class="controls">
-            <svg class="knob" id="cc-22"></svg>
+        <div id="cc-23-options" class="grid-3x2 controls-options-grid">
+            <div id="cc-23-0" class="bt">LP</div>
+            <div id="cc-23-87" class="bt">v. LP</div>
+            <div id="cc-23-32" class="bt">BP</div>
+            <div id="cc-23-115" class="bt">v. BP</div>
+            <div id="cc-23-59" class="bt">HP</div>
+            <div id="cc-23-127" class="bt">v. HP</div>
         </div>
     </div>
     <!--
@@ -35,10 +39,7 @@
     <div id="filter" class="grid-default mg-row-border-top controls-row">
         <div class="header exp infos" data-infos="17">
             <div class="header-shortcut hidden">[F,G]</div>
-            <div>micro tune</div>
-        </div>
-        <div class="value-human">
-            &nbsp;
+            <div>filter</div>
         </div>
         <div class="controls">
             <svg class="knob" id="cc-17"></svg>
@@ -49,13 +50,15 @@
     -->
     <div id="filter-type" class="grid-default mg-row-border-top controls-row">
         <div class="header exp infos" data-infos="23">
-            <div>glide</div>
+            <div>filter type</div>
         </div>
-        <div class="value-human">
-            glide 42%
-        </div>
-        <div class="controls">
-            <svg class="knob" id="cc-23"></svg>
+        <div id="cc-23-options" class="grid-3x2 controls-options-grid">
+            <div id="cc-23-0" class="bt">LP</div>
+            <div id="cc-23-87" class="bt">v. LP</div>
+            <div id="cc-23-32" class="bt">BP</div>
+            <div id="cc-23-115" class="bt">v. BP</div>
+            <div id="cc-23-59" class="bt">HP</div>
+            <div id="cc-23-127" class="bt">v. HP</div>
         </div>
     </div>
     <!--
@@ -65,9 +68,6 @@
         <div class="header exp infos" data-infos="18">
             <div class="header-shortcut hidden">[Y,X]</div>
             <div>mix</div>
-        </div>
-        <div class="value-human">
-            &nbsp;
         </div>
         <div class="controls">
             <svg class="knob" id="cc-18"></svg>
@@ -79,10 +79,7 @@
     <div id="delay-level" class="grid-default mg-row-border-top controls-row">
         <div class="header exp infos" data-infos="24">
             <div class="header-shortcut hidden">[K,L]</div>
-            <div>delay feedback</div>
-        </div>
-        <div class="value-human">
-            &nbsp;
+            <div>delay level</div>
         </div>
         <div class="controls">
             <svg class="knob" id="cc-24"></svg>
@@ -94,89 +91,95 @@
     <!--
         PITCH 1 - PITCH
     -->
-    <div id="sustain" class="grid-default controls-row">
+    <div id="sustain" class="controls-row span-2">
         <div class="header exp infos" data-infos="19">
             <div class="header-shortcut hidden">[DEL,B,N]</div>
-            <div>pitch 1</div>
+            <div>PITCH 1</div>
         </div>
-        <div class="value-human">
-            value...
+        <div class="pitch-interval">
+            <div>-2 o</div>
+            <div>-1 o</div>
+            <div>-5</div>
+            <div>-5</div>
+            <div>-3</div>
+            <div>-2</div>
+            <div>unison</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>+1</div>
+            <div>+2</div>
         </div>
-        <div class="controls">
-            <svg class="knob" id="cc-19"></svg>
+        <div class="pitch-time">
+            pitch-time
         </div>
     </div>
     <!--
         PITCH 1 - TIME DIV
     -->
+<!--
     <div id="ring-mod" class="grid-default controls-row">
         <div class="header exp infos" data-infos="25">
             <div class="header-shortcut hidden">[Z,U]</div>
-            <div>time 1</div>
-        </div>
-        <div class="value-human">
-            value...
+            <div>ring mod</div>
         </div>
         <div class="controls">
             <svg class="knob" id="cc-25"></svg>
         </div>
     </div>
+-->
     <!--
         PITCH 2 - PITCH
     -->
-    <div id="filter-env" class="grid-default controls-row">
+    <div id="filter-env" class="controls-row span-2">
         <div class="header exp infos" data-infos="20">
             <div>PITCH 2</div>
         </div>
-        <div class="value-human">
-            value...
-        </div>
-        <div class="controls">
-            <svg class="knob" id="cc-20"></svg>
+        <div class="Xcontrols">
         </div>
     </div>
     <!--
         PITCH 2 - TIME DIV
     -->
+<!--
     <div id="filter-bandwidth" class="grid-default controls-row">
         <div class="header exp infos" data-infos="26">
-            <div>time 2</div>
-        </div>
-        <div class="value-human">
-            value...
+            <div class="header-shortcut hidden">[H,J]</div>
+            <div>filter Q</div>
+            <i class="fas fa-lock icon-btn control-lock control-26 hidden" style="font-size: 0.75rem;color:#777" aria-hidden="true"></i>
         </div>
         <div class="controls">
             <svg class="knob" id="cc-26"></svg>
         </div>
     </div>
+-->
     <!--
         PITCH 3 - PITCH
     -->
-    <div id="modulation" class="grid-default controls-row">
+    <div id="modulation" class="controls-row span-2">
         <div class="header exp infos" data-infos="21">
+            <div class="header-shortcut hidden">[-,+]</div>
             <div>PITCH 3</div>
+            <i class="fas fa-lock icon-btn control-lock control-21 hidden" style="font-size: 0.75rem;color:#777" aria-hidden="true"></i>
         </div>
-        <div class="value-human">
-            value...
-        </div>
-        <div class="controls">
-            <svg class="knob" id="cc-21"></svg>
+        <div class="Xcontrols">
         </div>
     </div>
     <!--
         PITCH 2 - TIME DIV
     -->
+<!--
     <div id="delay-feedback" class="grid-default controls-row">
         <div class="header exp infos" data-infos="27">
-            <div>time 3</div>
-        </div>
-        <div class="value-human">
-            value...
+            <div>dly feedback</div>
+            <i class="fas fa-lock icon-btn control-lock control-27 hidden" style="font-size: 0.75rem;color:#777" aria-hidden="true"></i>
         </div>
         <div class="controls">
             <svg class="knob" id="cc-27"></svg>
         </div>
     </div>
+-->
 <div class="mg-border-right"></div>
 
 <div class="mg-border-left mg-row-border-bottom pb-5"></div>
@@ -225,11 +228,11 @@
     -->
     <div id="env-type" class="grid-default mg-last-row mg-row-border-bottom controls-row pb-5">
         <div class="header infos" data-infos="9">
-            <div>delay speed</div>
+            <div>env type</div>
         </div>
         <div id="cc-9-options" class="grid-2x1 controls-options-grid">
-            <div id="cc-9-0" class="bt">normal speed</div>
-            <div id="cc-9-127" class="bt">half speed</div>
+            <div id="cc-9-0" class="bt">TRIGGERED</div>
+            <div id="cc-9-127" class="bt">FOLLOWER</div>
         </div>
     </div>
     <!--
@@ -237,20 +240,18 @@
     -->
     <div id="synth-mode" class="grid-default mg-last-row mg-row-border-bottom controls-row pb-5">
         <div class="header infos" data-infos="29">
-            <div>signal flow</div>
+            <div>synth</div>
         </div>
-        <div id="cc-29-options" class="delay-mode-grid controls-options-grid">
-            <div id="cc-29-0" class="bt">series + pitch fdbk</div>
-            <div id="cc-29-95" class="bt">series</div>
-            <div id="cc-29-63" class="bt">dual + cross fdbk</div>
-            <div id="cc-29-127" class="bt">dual</div>
+        <div id="cc-29-options" class="synth-mode-grid controls-options-grid">
+            <div id="cc-29-0" class="bt">DRY</div>
+            <div id="cc-29-95" class="bt">ARP</div>
+            <div id="cc-29-63" class="bt">MONO</div>
+            <div id="cc-29-127" class="bt">POLY</div>
         </div>
-<!--
         <div id="cc-30-options" class="synth-wave-grid controls-options-grid">
             <div id="cc-30-0" class="bt">SAW</div>
             <div id="cc-30-127" class="bt">SQUARE</div>
         </div>
--->
     </div>
     <!--
         EXP

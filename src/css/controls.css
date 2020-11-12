@@ -68,6 +68,11 @@ div.controls {
 /*    position: relative;*/
 /*}*/
 
+div.value-human {
+    text-align: center;
+}
+
+
 .control-lock {
     position: absolute;
     bottom: 4px;
@@ -159,10 +164,10 @@ div.controls-slider {
     }
 }
 
-.synth-mode-grid {
+.delay-mode-grid {
     display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: 1fr;
 }
 
 .synth-wave-grid {
@@ -186,4 +191,9 @@ div.controls-slider {
 
 #tempo-label {
     cursor: pointer;
+}
+
+.pitch-interval {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
 }

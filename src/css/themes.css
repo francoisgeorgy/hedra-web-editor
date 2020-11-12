@@ -31,9 +31,9 @@ html {
     --bt-color: #333;
     --bt-border: #333;
     --bt-hover-color: #000;
-    --bt-hover-bg-color: #eaea02;
+    --bt-hover-bg-color: #e0e0e0;
     --bt-on-color: #000;
-    --bt-on-bg-color: yellow;
+    --bt-on-bg-color: white;
     --bt-on-border: #f9d000;
 
     --sw-color: #706c58;
@@ -43,7 +43,7 @@ html {
     --inset-shadow-color: #000000;
 
     --select-color: #f9d000;
-    --select-bg: #373738;
+    --select-bg: #e0e0e0;
     --select-border: #000;
 
     --on-color: #000;
@@ -70,8 +70,8 @@ a {
 
 #main-grid {
     /*background-color: lightgoldenrodyellow;*/
-    background-color: #fdb53e;
-    background-image: url("../img/bg-logo-opacity5.png"), linear-gradient(to right, #ffa, #fdb53e 1%, #fdb53e 99%, #ffa);
+    background-color: #c2c2c2;
+    background-image: url("../img/bg-logo-opacity5.png"), linear-gradient(to right, #ffffff, #c2c2c2 1%, #c2c2c2 99%, #ffffff);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -82,10 +82,10 @@ a {
 }
 
 .mg-row-border-top {
-    border-top: 1px solid #f1d09c;
+    border-top: 1px solid #e0e0e0;
 }
 .mg-row-border-bottom {
-    border-bottom: 1px solid #bc9b65;
+    border-bottom: 1px solid #909090;
 }
 
 /*noinspection CssUnusedSymbol*/
