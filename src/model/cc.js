@@ -92,6 +92,17 @@ export function _key(value) {
     return KEY_LABELS[KEY_VALUES.findIndex(v => v >= value)];
 }
 
+const MODE_VALUES = [11, 37, 58, 78, 97, 119, 127];  // each value must the UPPER limit of the range
+const MODE_LABELS = ['Maj', 'Min', 'Melo ', 'Harm', '2Harm', 'East', 'Penta'];
+
+const _normalizeMode = function(value) {
+    return MODE_VALUES.find(v => v >= value);
+}
+
+export function _mode(value) {
+    return MODE_LABELS[MODE_VALUES.findIndex(v => v >= value)];
+}
+
 const PITCH_VALUES = [0, 2, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 123, 125, 127];  // each value must the UPPER limit of the range
 const PITCH_LABELS = [
     'off',
@@ -372,8 +383,9 @@ function defineControls() {
         infos: "Detunes the oscillators of each Synth voice<br/>(Sets <span style='font-size: small'>the amount</span> of delay pitch_3 in Dry mode)."
     };
     control[control_id.scale_type] = { // 22,
-        name: "Portamento",
-        human: _percent,
+        name: "Scale",
+        human: _mode,
+        normalize: _normalizeMode,
         sysex: {
             offset: 15,
             mask: [0x7F]
