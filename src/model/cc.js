@@ -1,3 +1,5 @@
+import {log} from "../debug";
+import {preferences} from "../preferences";
 
 // 20 settings:
 
@@ -33,7 +35,7 @@ export const control_id = {
     pitch_1: 19,
     pitch_2: 20,
     pitch_3: 21,
-    scale_type: 22,         // ALT / 2nd layer
+    scale: 22,         // ALT / 2nd layer
     pitch_correction: 23,   // ALT / 2nd layer
     feedback: 24,           // ALT / 2nd layer
     time_division_1: 25,    // ALT / 2nd layer
@@ -103,23 +105,50 @@ export function _mode(value) {
     return MODE_LABELS[MODE_VALUES.findIndex(v => v >= value)];
 }
 
-const PITCH_VALUES = [0, 2, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 123, 125, 127];  // each value must the UPPER limit of the range
-const PITCH_LABELS = [
-    'off',
+export function isChromatic(key = null) {
+    // log("isChromatic()", key, (key || control[control_id.key].raw_value) === 127);
+    return (key || control[control_id.key].raw_value) === 127;
+}
+
+export function isDiatonic(scale = null) {
+    // log("isDiatonic()", scale, control[control_id.scale].raw_value, (scale || control[control_id.scale].raw_value) < 98);
+    return (scale || control[control_id.scale].raw_value) < 98;
+}
+
+export function isPentatonic(scale = null) {
+    // log("isPentatonic()", scale, (scale || control[control_id.scale].raw_value) >= 98);
+    return (scale || control[control_id.scale].raw_value) >= 98;
+}
+
+export const PITCH_VALUES_CHROMATIC = [0, 2, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 123, 125, 127];  // each value must the UPPER limit of the range
+export const PITCH_LABELS_CHROMATIC = ['off',
     '-2 oct', '-1 oct', '-11', '-10', '-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0',
     '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+19', '+2 oct'];
-// const PITCH_LABELS_LONG = [
-//     'off',
-//     '2 octaves down', '1 octave down', '-11', '-10', '-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0',
-//     '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11',
-//     '1 octave up', '1 octave up + fifth', '2 octaves up'];
+
+export const PITCH_VALUES_DIATONIC = [0, 7, 11, 19, 27, 35, 43, 51, 59, 67, 75, 83, 91, 99, 107, 115, 119, 127];  // each value must the UPPER limit of the range
+export const PITCH_LABELS_DIATONIC = ['off',
+    '-2 oct', '-1 oct', '-7', '-6', '-5', '-4', '-3', '-2', '0',
+    '+2', '+3', '+4', '+5', '+6', '+7', '+1 oct', '+2 oct'];
+
+export const PITCH_VALUES_PENTATONIC = [0, 19, 27, 35, 43, 51, 59, 67, 75, 83, 91, 99, 107, 127];  // each value must the UPPER limit of the range
+export const PITCH_LABELS_PENTATONIC = ['off', '-2 oct', '-1 oct', '-5', '-4', '-3', '-2', '0', '+2', '+3', '+4', '+5', '+1 oct', '+2 oct'];
 
 const _normalizePitch = function(value) {
-    return PITCH_VALUES.find(v => v >= value);
+    return PITCH_VALUES_CHROMATIC.find(v => v >= value);
 }
 
 const _pitch = function(value) {
-    return PITCH_LABELS[PITCH_VALUES.findIndex(v => v >= value)];
+    if (isChromatic()) {    // chromatic
+        return PITCH_LABELS_CHROMATIC[PITCH_VALUES_CHROMATIC.findIndex(v => v >= value)];
+    }
+    if (isDiatonic()) {
+        return PITCH_LABELS_DIATONIC[PITCH_VALUES_DIATONIC.findIndex(v => v >= value)];
+    }
+    if (isPentatonic()) {
+        return PITCH_LABELS_PENTATONIC[PITCH_VALUES_PENTATONIC.findIndex(v => v >= value)];
+    }
+
+    return PITCH_LABELS_CHROMATIC[PITCH_VALUES_CHROMATIC.findIndex(v => v >= value)];
     // if (v === 0) {
     //     return "off";
     // } else if (v < 3) {
@@ -261,6 +290,9 @@ export const _tempo_bpm = function (v) {
 };
 
 function defineControls() {
+
+    log(`%cdefineControls: setup model`, "color: yellow; font-weight: bold");
+
     control[control_id.exp_pedal] = { // 4,
         name: "Exp pedal",
         human: _0_100,
@@ -382,7 +414,7 @@ function defineControls() {
         },
         infos: "Detunes the oscillators of each Synth voice<br/>(Sets <span style='font-size: small'>the amount</span> of delay pitch_3 in Dry mode)."
     };
-    control[control_id.scale_type] = { // 22,
+    control[control_id.scale] = { // 22,
         name: "Scale",
         human: _mode,
         normalize: _normalizeMode,

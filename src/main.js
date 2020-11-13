@@ -389,7 +389,7 @@ function connectOutputDevice(id) {
  */
 function deviceConnected(info) {
 
-    if (TRACE) console.group("%cdeviceConnected event", "color: yellow; font-weight: bold", info.port.id, info.port.type, info.port.name);
+    // if (TRACE) console.group("%cdeviceConnected event", "color: yellow; font-weight: bold", info.port.id, info.port.type, info.port.name);
 
     // let input_connected = false;
     // let output_connected = false;
@@ -431,7 +431,7 @@ function deviceConnected(info) {
     }
 */
 
-    if (TRACE) console.groupEnd();
+    // if (TRACE) console.groupEnd();
 }
 
 /**

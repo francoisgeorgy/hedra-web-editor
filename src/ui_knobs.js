@@ -3,10 +3,18 @@ import MODEL from "./model";
 import Knob from "svg-knob";
 import {KNOB_THEME_DEFAULT} from "./ui_schemes";
 import {handleUserAction, updateLinkedSelects} from "./ui";
+import {control_id} from "./model/cc";
+import {updateSelects} from "./ui_controls_selects";
 
 export const knobs = {};         // collection of svg-knob
 
 function knobCallback(control_type, control_number, value) {
+    log("knobCallback", control_number, value);
+    if (control_number === control_id.key || control_number === control_id.scale) {
+        const prev_key = MODEL.getControlValue(MODEL.control[control_id.key]);
+        const prev_scale = MODEL.getControlValue(MODEL.control[control_id.scale]);
+        updateSelects(prev_key, prev_scale, control_number === control_id.key ? value : null, control_number === control_id.scale ? value : null);
+    }
     handleUserAction(control_type, control_number, value);
     updateLinkedSelects(control_type, control_number, value);
 }
@@ -35,7 +43,7 @@ export function setupKnobs(userActionCallback) {
         }
         if (!elem.classList.contains("knob")) continue;
 
-        log(`configure #${id}: range=${c.cc_range}, init-value=${v}`);
+        log(`setupKnobs: configure #${id}: range=${c.cc_range}, init-value=${v}`);
 
         knobs[id] = new Knob(elem, KNOB_THEME_DEFAULT);
         knobs[id].config = {

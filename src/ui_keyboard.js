@@ -182,7 +182,7 @@ function keyDown(code, alt, shift, meta, ctrl) {
 
     //FIXME: map to key's position, not key's value (in order to be isolated from the keyboard layout)
 
-    const portamento = MODEL.getControlValue(MODEL.getControl(MODEL.control_id.scale_type));
+    const portamento = MODEL.getControlValue(MODEL.getControl(MODEL.control_id.scale));
 
     if (!alt && !shift && !meta) {
         switch (code) {
@@ -302,7 +302,7 @@ function keyDown(code, alt, shift, meta, ctrl) {
                 animateTo(MODEL.control_id.pitch_3, ctrl ? 63 : 127);
                 break;
             case 79:                // O
-                animateFromTo(MODEL.control_id.scale_type, scale_type, ctrl ? 63 : (scale_type < 63 ? 127 : 0));
+                animateFromTo(MODEL.control_id.scale, scale, ctrl ? 63 : (scale < 63 ? 127 : 0));
                 break;
 */
         }

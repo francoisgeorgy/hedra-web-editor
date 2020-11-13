@@ -48,7 +48,6 @@ export function handleUserAction(control_type, control_number, value) {
 }
 
 export function updateLinkedSelects(control_type, control_number, value) {
-
     // update controls selects:
     const id = control_type + "-" + control_number;
     let c = $(`select#${id}-values`);
@@ -56,10 +55,9 @@ export function updateLinkedSelects(control_type, control_number, value) {
     if (c.length) {
         const normalized_value = MODEL.control[control_number].normalize(value);
         // MODEL.control[control_number].raw_value;
-        log(`updateLinkedSelects: update select #${c.id} with value ${id}-${value} --> ${id}-${normalized_value}`);
+        log(`updateLinkedSelects: update select #${c.attr('id')} with value ${id}-${value} --> ${id}-${normalized_value}`);
         c.val(`${id}-${normalized_value}`);
     }
-
 }
 
 /**
@@ -164,11 +162,14 @@ export function updateModelAndUI(control_type, control_number, value) {
 
     //FIXME: no need for control_type
 
-    log("updateModelAndUI", control_type, control_number, value);
+    if (TRACE) console.group("updateModelAndUI", control_type, control_number, value);
+
+    // log("updateModelAndUI", control_type, control_number, value);
 
     control_type = control_type.toLowerCase();
     if (control_type !== "cc") {
         warn(`updateModelAndUI: unsupported control type: ${control_type}`);
+        if (TRACE) console.groupEnd();
         return;
     }
 
@@ -179,6 +180,7 @@ export function updateModelAndUI(control_type, control_number, value) {
     const num_value = typeof value === 'number' ? value : parseInt(value, 10);
     if (isNaN(num_value)) {
         warn(`updateModelAndUI: invalid value:`, value);
+        if (TRACE) console.groupEnd();
         return;
     }
 
@@ -201,6 +203,9 @@ export function updateModelAndUI(control_type, control_number, value) {
     } else {
         log(`the MODEL does not support this control: ${num}`)
     }
+
+    if (TRACE) console.groupEnd();
+
 }
 
 /*
@@ -352,7 +357,8 @@ function setupMenu() {
  * Does a MODEL.init() too, but only the virtual MODEL; does not send any CC to the connected device.
  */
 export function setupUI(channelSelectionCallback, inputSelectionCallback, outputSelectionCallback, input2ChannelSelectionCallback, input2SelectionCallback) {
-    if (TRACE) console.groupCollapsed("setupUI");
+
+    if (TRACE) console.group("setupUI");
 
     $("span.version").text(VERSION);
 
