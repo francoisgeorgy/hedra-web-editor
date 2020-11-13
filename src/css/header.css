@@ -36,9 +36,13 @@
 */
 
 .neon {
-    color: #f8f812;
+    color: #ffffff;
     /*font-family: Roboto, sans-serif;*/
     /*font-weight: bold;*/
+}
+
+.light {
+    color: #555555;
 }
 
 #header > .menu {

@@ -2,8 +2,14 @@ import {log} from "./debug";
 import MODEL from "./model";
 import Knob from "svg-knob";
 import {KNOB_THEME_DEFAULT} from "./ui_schemes";
+import {handleUserAction, updateLinkedSelects} from "./ui";
 
 export const knobs = {};         // collection of svg-knob
+
+function knobCallback(control_type, control_number, value) {
+    handleUserAction(control_type, control_number, value);
+    updateLinkedSelects(control_type, control_number, value);
+}
 
 /**
  *
@@ -46,7 +52,8 @@ export function setupKnobs(userActionCallback) {
         knobs[id].disableDebug();
 
         elem.addEventListener("change", function(event) {
-            userActionCallback(c.cc_type, c.cc_number, event.detail);
+            // userActionCallback(c.cc_type, c.cc_number, event.detail);
+            knobCallback(c.cc_type, c.cc_number, event.detail);
         });
     }
 

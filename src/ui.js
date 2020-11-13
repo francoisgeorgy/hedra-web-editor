@@ -27,6 +27,8 @@ import {inExpMode} from "./ui_exp";
 import {setLibraryPresetDirty, setupPresetsLibrary} from "./preset_library";
 import {setupTooltips} from "./tooltips";
 import {_tempo_bpm, _tempo_ms, control, control_id} from "./model/cc";
+import {setupControlsSelects} from "./ui_controls_selects";
+import {normalizeKey} from "./model/normalize";
 
 
 /**
@@ -44,6 +46,20 @@ export function handleUserAction(control_type, control_number, value) {
         }
         updateDevice(control_type, n, value, inExpMode());
     }
+}
+
+export function updateLinkedSelects(control_type, control_number, value) {
+
+    // update controls selects:
+    const id = control_type + "-" + control_number;
+    let c = $(`select#${id}-values`);
+    log(`updateLinkedSelects: select#${id}-values}`);
+    if (c.length) {
+        const normalized_value = normalizeKey(value);
+        log(`updateLinkedSelects: update select #${c.id} with value ${id}-${value} --> ${id}-${normalized_value}`);
+        c.val(`${id}-${normalized_value}`);
+    }
+
 }
 
 /**
@@ -66,6 +82,7 @@ export function updateControl(control_type, control_number, value, mappedValue) 
     const id = control_type + "-" + control_number;
 
     if (knobs.hasOwnProperty(id)) {
+        log("update knob value", id, value);
         knobs[id].value = value;        //TODO: doesn't the knob update its value itself?
     } else {
 
@@ -110,6 +127,10 @@ export function updateControl(control_type, control_number, value, mappedValue) 
         }
 
     }
+
+    // update controls selects:
+    updateLinkedSelects(control_type, control_number, value);
+
 }
 
 /**
@@ -153,16 +174,24 @@ export function updateModelAndUI(control_type, control_number, value) {
 
     const num = parseInt(control_number, 10);
 
+    // console.warn("updateModelAndUI", typeof value);
+
+    const num_value = typeof value === 'number' ? value : parseInt(value, 10);
+    if (isNaN(num_value)) {
+        warn(`updateModelAndUI: invalid value:`, value);
+        return;
+    }
+
     if (MODEL.control[num]) {
 
         // update the model:
-        MODEL.setControlValue(control_type, num, value);
+        MODEL.setControlValue(control_type, num, num_value);
 
         // update the UI:
-        updateControl(control_type, num, value);
+        updateControl(control_type, num, num_value);
 
         if (num === MODEL.control_id.exp_pedal) {
-            MODEL.interpolateExpValues(value);
+            MODEL.interpolateExpValues(num_value);
             updateControls(true);
         }
 
@@ -333,6 +362,7 @@ export function setupUI(channelSelectionCallback, inputSelectionCallback, output
     setCommunicationStatus(false);
     setupPresetSelectors(handleUserAction);
     setupKnobs(handleUserAction);
+    setupControlsSelects(handleUserAction);
     setupSwitches(handleUserAction);
     setupMomentarySwitches(tapDown, tapRelease);
     setupExp(handleUserAction);

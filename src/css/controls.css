@@ -197,3 +197,9 @@ div.controls-slider {
     display: grid;
     grid-template-columns: repeat(13, 1fr);
 }
+
+select.cc-values {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #a0a0a0;
+}

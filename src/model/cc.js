@@ -83,19 +83,63 @@ const _4_steps = function (v) {
 
 const _pitch = function (v) {
     if (v === 0) {
+        return "off";
+    } else if (v < 3) {
         return "-2 oct";
     } else if (v < 12) {
         return "-1 oct";
+    } else if (v < 16) {
+        return "-11";
+    } else if (v < 20) {
+        return "-10";
+    } else if (v < 24) {
+        return "-9";
+    } else if (v < 28) {
+        return "-8";
+    } else if (v < 32) {
+        return "-7";
+    } else if (v < 36) {
+        return "-6";
+    } else if (v < 40) {
+        return "-5";
+    } else if (v < 44) {
+        return "-4";
+    } else if (v < 48) {
+        return "-3";
+    } else if (v < 52) {
+        return "-2";
     } else if (v < 56) {
-        return Math.floor((v - 56) / 4);
-    } else if (v >= 56 && v < 72) {
+        return "-1";
+    } else if (v < 72) {
         return "0";
+    } else if (v < 76) {
+        return "1";
+    } else if (v < 80) {
+        return "2";
+    } else if (v < 84) {
+        return "3";
+    } else if (v < 88) {
+        return "4";
+    } else if (v < 92) {
+        return "5";
+    } else if (v < 96) {
+        return "6";
+    } else if (v < 100) {
+        return "7";
+    } else if (v < 104) {
+        return "8";
+    } else if (v < 108) {
+        return "9";
+    } else if (v < 112) {
+        return "10";
     } else if (v < 116) {
-        return Math.floor((v - 68) / 4);
-    } else if (v < 127) {
-        return "+1 oct";
+        return "11";
+    } else if (v < 124) {
+        return "12";
+    } else if (v < 126) {
+        return "+19 Octave + Fifth";
     } else {
-        return "+2 oct";
+        return "24 Two octaves up";
     }
 };
 
@@ -215,10 +259,10 @@ function defineControls() {
         infos: "Sets the time for the delay line and arpeggiated Synth."
     };
     control[control_id.key] = { // 16,
-        name: "Pitch",
-        init_value: 63,
-        cc_center: [63, 64],
-        human: _pitch,
+        name: "Key",
+        init_value: 0,
+        // cc_center: [63, 64],
+        // human: _key,
         sysex: {
             offset: 9,
             mask: [0x7F]
@@ -227,7 +271,7 @@ function defineControls() {
             offset: 26,
             mask: [0x7F]
         },
-        infos: "Changes the key of the Synth or Dry signal in half step increments."
+        infos: "Select the key"
     };
     control[control_id.micro_tune] = { // 17,
         name: "Filter",

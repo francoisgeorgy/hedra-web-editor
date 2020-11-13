@@ -4,11 +4,24 @@
     -->
     <div id="pitch" class="grid-default mg-row-border-top controls-row">
         <div class="header exp infos" data-infos="16">
-            <div class="header-shortcut hidden">[C,V]</div>
             <div>Key</div>
         </div>
         <div class="value-human">
-            C#
+            <select id="cc-16-values" class="cc-values">
+                <option value="cc-16-0">C</option>
+                <option value="cc-16-3">Db</option>
+                <option value="cc-16-12">D</option>
+                <option value="cc-16-26">Eb</option>
+                <option value="cc-16-38">E</option>
+                <option value="cc-16-48">F</option>
+                <option value="cc-16-59">Gb</option>
+                <option value="cc-16-67">G</option>
+                <option value="cc-16-78">Ab</option>
+                <option value="cc-16-88">A</option>
+                <option value="cc-16-98">Bb</option>
+                <option value="cc-16-109">B</option>
+                <option value="cc-16-120">Chromatic</option>
+            </select>
         </div>
         <div class="controls">
             <svg class="knob" id="cc-16"></svg>
@@ -19,7 +32,6 @@
     -->
     <div id="portamento" class="grid-default mg-row-border-top controls-row">
         <div class="header exp infos" data-infos="22">
-            <div class="header-shortcut hidden">[O]</div>
             <div>mode</div>
         </div>
         <div class="value-human">
@@ -183,7 +195,7 @@
     <!--
         TAP
     -->
-    <div id="tap" class="grid-default mg-last-row mg-row-border-bottom pb-5">
+    <div id="tap" class="grid-default mg-last-row mg-row-border-bottom controls-row pb-5">
         <div class="header infos" data-infos="28">
             <div class="header-shortcut hidden">[T]</div>
             <div>tap</div>

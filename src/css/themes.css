@@ -33,11 +33,11 @@ html {
     --bt-hover-color: #000;
     --bt-hover-bg-color: #e0e0e0;
     --bt-on-color: #000;
-    --bt-on-bg-color: white;
+    --bt-on-bg-color: #f8f8f8;
     --bt-on-border: #f9d000;
 
     --sw-color: #706c58;
-    --sw-on-color: yellow;
+    --sw-on-color: #f8f8f8;
     --sw-on-shadow-color: #1d1d01;
 
     --inset-shadow-color: #000000;
