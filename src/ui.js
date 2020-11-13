@@ -26,9 +26,8 @@ import {setupExp, updateExpSlider} from "./ui_exp";
 import {inExpMode} from "./ui_exp";
 import {setLibraryPresetDirty, setupPresetsLibrary} from "./preset_library";
 import {setupTooltips} from "./tooltips";
-import {_tempo_bpm, _tempo_ms, control, control_id} from "./model/cc";
+import {_tempo_bpm, _tempo_ms, control, control_id, normalizeKey} from "./model/cc";
 import {setupControlsSelects} from "./ui_controls_selects";
-import {normalizeKey} from "./model/normalize";
 
 
 /**
@@ -55,7 +54,8 @@ export function updateLinkedSelects(control_type, control_number, value) {
     let c = $(`select#${id}-values`);
     log(`updateLinkedSelects: select#${id}-values}`);
     if (c.length) {
-        const normalized_value = normalizeKey(value);
+        const normalized_value = MODEL.control[control_number].normalize(value);
+        // MODEL.control[control_number].raw_value;
         log(`updateLinkedSelects: update select #${c.id} with value ${id}-${value} --> ${id}-${normalized_value}`);
         c.val(`${id}-${normalized_value}`);
     }

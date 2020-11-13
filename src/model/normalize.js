@@ -1,4 +1,5 @@
 
+/*
 export function normalizeKey(v) {
     if (v < 3) {
         return 0;
@@ -28,6 +29,7 @@ export function normalizeKey(v) {
         return 120;
     }
 }
+*/
 
 function normalizePitch(v) {
     if (v === 0) {

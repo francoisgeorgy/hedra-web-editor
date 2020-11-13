@@ -81,66 +81,93 @@ const _4_steps = function (v) {
     }
 };
 
-const _pitch = function (v) {
-    if (v === 0) {
-        return "off";
-    } else if (v < 3) {
-        return "-2 oct";
-    } else if (v < 12) {
-        return "-1 oct";
-    } else if (v < 16) {
-        return "-11";
-    } else if (v < 20) {
-        return "-10";
-    } else if (v < 24) {
-        return "-9";
-    } else if (v < 28) {
-        return "-8";
-    } else if (v < 32) {
-        return "-7";
-    } else if (v < 36) {
-        return "-6";
-    } else if (v < 40) {
-        return "-5";
-    } else if (v < 44) {
-        return "-4";
-    } else if (v < 48) {
-        return "-3";
-    } else if (v < 52) {
-        return "-2";
-    } else if (v < 56) {
-        return "-1";
-    } else if (v < 72) {
-        return "0";
-    } else if (v < 76) {
-        return "1";
-    } else if (v < 80) {
-        return "2";
-    } else if (v < 84) {
-        return "3";
-    } else if (v < 88) {
-        return "4";
-    } else if (v < 92) {
-        return "5";
-    } else if (v < 96) {
-        return "6";
-    } else if (v < 100) {
-        return "7";
-    } else if (v < 104) {
-        return "8";
-    } else if (v < 108) {
-        return "9";
-    } else if (v < 112) {
-        return "10";
-    } else if (v < 116) {
-        return "11";
-    } else if (v < 124) {
-        return "12";
-    } else if (v < 126) {
-        return "+19 Octave + Fifth";
-    } else {
-        return "24 Two octaves up";
-    }
+const KEY_VALUES = [2, 11, 25, 37, 47, 58, 66, 77, 87, 97, 108, 119, 127];  // each value must the UPPER limit of the range
+const KEY_LABELS = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'chrom'];
+
+const _normalizeKey = function(value) {
+    return KEY_VALUES.find(v => v >= value);
+}
+
+export function _key(value) {
+    return KEY_LABELS[KEY_VALUES.findIndex(v => v >= value)];
+}
+
+const PITCH_VALUES = [0, 2, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 123, 125, 127];  // each value must the UPPER limit of the range
+const PITCH_LABELS = [
+    'off',
+    '-2 oct', '-1 oct', '-11', '-10', '-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0',
+    '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+19', '+2 oct'];
+// const PITCH_LABELS_LONG = [
+//     'off',
+//     '2 octaves down', '1 octave down', '-11', '-10', '-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0',
+//     '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11',
+//     '1 octave up', '1 octave up + fifth', '2 octaves up'];
+
+const _normalizePitch = function(value) {
+    return PITCH_VALUES.find(v => v >= value);
+}
+
+const _pitch = function(value) {
+    return PITCH_LABELS[PITCH_VALUES.findIndex(v => v >= value)];
+    // if (v === 0) {
+    //     return "off";
+    // } else if (v < 3) {
+    //     return "-2 oct";
+    // } else if (v < 12) {
+    //     return "-1 oct";
+    // } else if (v < 16) {
+    //     return "-11";
+    // } else if (v < 20) {
+    //     return "-10";
+    // } else if (v < 24) {
+    //     return "-9";
+    // } else if (v < 28) {
+    //     return "-8";
+    // } else if (v < 32) {
+    //     return "-7";
+    // } else if (v < 36) {
+    //     return "-6";
+    // } else if (v < 40) {
+    //     return "-5";
+    // } else if (v < 44) {
+    //     return "-4";
+    // } else if (v < 48) {
+    //     return "-3";
+    // } else if (v < 52) {
+    //     return "-2";
+    // } else if (v < 56) {
+    //     return "-1";
+    // } else if (v < 72) {
+    //     return "0";
+    // } else if (v < 76) {
+    //     return "1";
+    // } else if (v < 80) {
+    //     return "2";
+    // } else if (v < 84) {
+    //     return "3";
+    // } else if (v < 88) {
+    //     return "4";
+    // } else if (v < 92) {
+    //     return "5";
+    // } else if (v < 96) {
+    //     return "6";
+    // } else if (v < 100) {
+    //     return "7";
+    // } else if (v < 104) {
+    //     return "8";
+    // } else if (v < 108) {
+    //     return "9";
+    // } else if (v < 112) {
+    //     return "10";
+    // } else if (v < 116) {
+    //     return "11";
+    // } else if (v < 124) {
+    //     return "12";
+    // } else if (v < 126) {
+    //     return "+19 Octave + Fifth";
+    // } else {
+    //     return "24 Two octaves up";
+    // }
 };
 
 const _filter_type = function (v) {
@@ -262,7 +289,8 @@ function defineControls() {
         name: "Key",
         init_value: 0,
         // cc_center: [63, 64],
-        // human: _key,
+        human: _key,
+        normalize: _normalizeKey,
         sysex: {
             offset: 9,
             mask: [0x7F]
@@ -302,8 +330,9 @@ function defineControls() {
         infos: "Adjusts the balance between Dry and Wet signals."
     };
     control[control_id.pitch_1] = { // 19,
-        name: "Sustain",
-        human: _percent,
+        name: "Pitch 1",
+        human: _pitch,
+        normalize: _normalizePitch,
         sysex: {
             offset: 12,
             mask: [0x7F]
@@ -315,8 +344,9 @@ function defineControls() {
         infos: "Increases the pitch_1 of Synth notes (Compresses the input in Dry Mode)."
     };
     control[control_id.pitch_2] = { // 20,
-        name: "Filter envelope",
-        human: _filter_env,
+        name: "Pitch 2",
+        human: _pitch,
+        normalize: _normalizePitch,
         sysex: {
             offset: 13,
             mask: [0x7F]
@@ -328,8 +358,9 @@ function defineControls() {
         infos: "Sets attack and decay rates for the Triggered Envelope; sets the direction and sensitivity for the Envelope Follower."
     };
     control[control_id.pitch_3] = { // 21,
-        name: "Modulation",
-        human: _off_when_zero_percent,
+        name: "Pitch 3",
+        human: _pitch,
+        normalize: _normalizePitch,
         sysex: {
             offset: 14,
             mask: [0x7F]
@@ -464,6 +495,14 @@ function defineControls() {
 
         if (!obj.hasOwnProperty("human")) {
             obj.human = v => v;
+        }
+
+        // if (!obj.hasOwnProperty("human_long")) {
+        //     obj.human_long = obj.human;
+        // }
+
+        if (!obj.hasOwnProperty("normalize")) {
+            obj.normalize = v => v;
         }
 
         if (!obj.hasOwnProperty("on_off")) {
